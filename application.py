@@ -6,33 +6,37 @@ import xlwings as xw
 from src.components import data_ingestion
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 import pdb
+from sklearn.preprocessing import StandardScaler
 
 st.set_page_config(
     page_title="Ashad ML projects",
     page_icon=":rocket:",
-    layout="wide"
+    layout="centered"
     )
 
-def home():
-    
-    st.write("Welcome to my ML prediction Model 👋")
-    
-    # st.sidebar.success("TradeHull Home")
-
-    # st.markdown(
-    #     """
-    #     ### This is Trade Hull Alice Blue Copy Trade Software
-
-    #     **👈 NAVIGATE to different pages using Dropdown**
-        
-
-    # """
-    #     )
 
 def user_inputs():
+ 
     
-    st.write("# Fill The Required Features For Prediction")
-    st.sidebar.success("SCORE PREDICTION")
+    st.markdown(
+        """
+        # Maths Score Prediction Model :atom_symbol:
+        
+        \n
+        
+        **:large_purple_circle: This model is created using machine learning techniques.:computer:**
+
+        **:large_yellow_circle: It helps to predict Maths score of a students on the basis of few features.**
+
+        **:large_orange_circle: Have fun by trying your hands on predicting the score. :smile:**
+        
+
+    """
+        )
+    st.write('\n')
+    st.write("---")
+    st.write("**Fill The Required Features For Prediction :arrow_down:**")
+    # st.sidebar.success("SCORE PREDICTION")
 
     df = get_data()
     gender_option = list(df['gender'].unique())
@@ -54,7 +58,7 @@ def user_inputs():
         test_preparation_course=st.selectbox('**Test Preparation Course**',test_course_option,key=5)
         reading_score=st.slider('**Reading Score**',min_value=0,max_value=100)
         writing_score=st.slider('**Writting Score**',min_value=0,max_value=100)
-        submit_button=st.form_submit_button(label='PREDICT MATH SCORE')
+        submit_button=st.form_submit_button(label='PREDICT MATH SCORE :student:')
 
         data = CustomData(Gender,Race_Ethnicity,parental_level_of_education,Lunch,test_preparation_course,reading_score,writing_score)
         features = data.get_data_as_data_frame()
@@ -62,7 +66,7 @@ def user_inputs():
         if submit_button:
             predict_pipeline = PredictPipeline()
             preds = predict_pipeline.predict(features)
-            st.success(f'The Predicted Math Score is {round(preds[0],1)}')
+            st.success(f'**The Predicted Math Score is: {round(preds[0],1)}**')
 
 def get_data():
     obj = data_ingestion.Dataingestion()
@@ -72,18 +76,6 @@ def get_data():
     # st.checkbox("Use container width", value=False, key="use_container_width")
     # st.dataframe(df,use_container_width=st.session_state.use_container_width)
 
-page_names_to_funcs = {
-    
-    "Home": home,
-    "Features": user_inputs,
-    "Data":get_data,
-    # "Add Clients":Feed_clients
-    
-}
-
-demo_name = st.sidebar.selectbox("Choose Pages", page_names_to_funcs.keys())
-page_names_to_funcs[demo_name]()
-
 # streamlit run application.py
-# if __name__ == "__main__":
-#     get_data()
+if __name__ == "__main__":
+    user_inputs()
