@@ -1,7 +1,6 @@
 '''To be design using streamlit'''
 import streamlit as st
 import pandas as pd
-import xlwings as xw 
 from src.components import data_ingestion
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 from sklearn.preprocessing import StandardScaler
