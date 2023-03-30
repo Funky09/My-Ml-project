@@ -1,11 +1,9 @@
 '''To be design using streamlit'''
 import streamlit as st
-import numpy as np
 import pandas as pd
 import xlwings as xw 
 from src.components import data_ingestion
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
-import pdb
 from sklearn.preprocessing import StandardScaler
 
 st.set_page_config(
